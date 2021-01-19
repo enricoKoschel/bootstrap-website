@@ -1,22 +1,29 @@
+<!DOCTYPE html>
+
 <center>
 	<head>
+		<meta charset="UTF-8">
+
 		<!-- CSS only -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+			  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+			  crossorigin="anonymous">
 		<!-- JavaScript Bundle with Popper -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<?php
 			//Datenbankvariable festlegen
-			$mServer="localhost";
+			$mServer = "localhost";
 			$mBenutzer = "USER409427";
 			$mKennwort = "AlarmStufeRot";
 			$mDatenbank = "db_409427_2";
 			//Datenbankverbindung herstellen
 			$dbVerbindung = new mysqli($mServer, $mBenutzer, $mKennwort, $mDatenbank);
 			// Datenbankverbindung hergestellt ?
-			if(mysqli_connect_errno() == 0)
-			{  
+			if (mysqli_connect_errno() == 0) {
 				// Datenübernahme aus der Form
 				$artikelNummer = $_POST['artikelnummer'];
 				// SQL-Anweisung erstellen
@@ -37,59 +44,55 @@
 					AND auftragskoepfe.AufNr = auftragspositionen.AufNr
 					AND kunden.KdNr = auftragskoepfe.KdNr
 				";
-				
+
 				$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
-				if($abfrageErgebnis->num_rows == 0){
+				if ($abfrageErgebnis->num_rows == 0) {
 					echo("<h2>Artikelnummer nicht vorhanden oder Artikel wurde nicht bestellt!</h2>");
-				}
-				else{
+				} else {
 					echo("
 						<table border =\"1\">
 							<tr>
 								<th>Kunden Nummer</th>
 								<th>Name</th>
-								<th>Stra&szlig;e</th>
+								<th>Straße</th>
 								<th>PLZ</th>
 								<th>Ort</th>
 							</tr>
 					");
-					
-					while ($kunde = $abfrageErgebnis->fetch_object())			 				  
-					{ 
+
+					while ($kunde = $abfrageErgebnis->fetch_object()) {
 						$kundenNummer = $kunde->KdNr;
 						$name = utf8_encode($kunde->Name);
 						$strasse = $kunde->Strasse;
 						$plz = $kunde->PLZ;
 						$ort = $kunde->Ort;
-						
+
 						echo("
 							<tr>
-								<td>". $kundenNummer ."</td>
-								<td>". $name ."</td>
-								<td>". $strasse ."</td>
-								<td>". $plz ."</td>
-								<td>". $ort ."</td>
+								<td>" . $kundenNummer . "</td>
+								<td>" . $name . "</td>
+								<td>" . $strasse . "</td>
+								<td>" . $plz . "</td>
+								<td>" . $ort . "</td>
 							</tr>
 						");
 					}
-					
+
 					echo("</table>");
-					
+
 					// Ergebnistabellenobjekt und Datenbankverbindung schließen
 					$abfrageErgebnis->close();
 					$dbVerbindung->close();
 				}
-			}
-			else
-			{ 
+			} else {
 				echo "<div class=\"alert alert-danger\" role=\"alert\">";
 				echo "<h2>Keine Datenbankverbindung</h2>";
 				echo "<p>Fehler: ", mysqli_connect_error(), "</p>";
 				echo "</div>";
 			}
-			
-		end:
+
+			end:
 		?>
 		<a href="index.html"><h1>Startseite</h1></a>
 	</body>
