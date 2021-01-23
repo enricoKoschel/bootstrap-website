@@ -79,7 +79,7 @@
 							AND auftragspositionen.ArtikelNr = artikel.ArtikelNr
 							)
 		
-							ORDER BY Umsatz DESC
+							ORDER BY Umsatz DESC, KdNr
 						";
 
 						$abfrageErgebnis = $dbVerbindung->query($mSQL);
