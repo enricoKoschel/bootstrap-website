@@ -58,9 +58,9 @@
 							</tr>
 							<tr>
 								<td>" . utf8_encode($kunde->Name) . "</td>
-								<td>" . $kunde->Strasse . "</td>
-								<td>" . $kunde->PLZ . "</td>
-								<td>" . $kunde->Ort . "</td>
+								<td>" . utf8_encode($kunde->Strasse) . "</td>
+								<td>" . utf8_encode($kunde->PLZ) . "</td>
+								<td>" . utf8_encode($kunde->Ort) . "</td>
 							</tr>
 						</table>
 					");

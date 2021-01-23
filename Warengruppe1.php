@@ -58,12 +58,11 @@
 					");
 
 							while ($aktuellerArtikel = $abfrageErgebnis->fetch_object()) {
-								$bezeichnung = utf8_encode($aktuellerArtikel->Bezeichnung);
-								echo "<tr><td> $aktuellerArtikel->ArtikelNr </td>";
-								echo "<td> $bezeichnung </td>";
-								echo "<td class = 'rechts'>";
+								echo "<tr><td>$aktuellerArtikel->ArtikelNr</td>";
+								echo "<td>". utf8_encode($aktuellerArtikel->Bezeichnung) ."</td>";
+								echo "<td>";
 								echo number_format($aktuellerArtikel->VkPreis, 2, ",", ".");
-								echo "</td><td class = 'rechts'>";
+								echo "</td><td>";
 								echo number_format($aktuellerArtikel->Bestand, 0, ",", ".");
 								echo "</td></tr>";
 							}
