@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+	<meta charset="UTF-8">
+
 	<!-- CSS only -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 		  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
@@ -15,6 +17,8 @@
 			$("#nav-placeholder").replaceWith(data);
 		});
 	</script>
+
+	<title>Kundendaten</title>
 </head>
 <body>
 	<div class="container">
@@ -40,12 +44,12 @@
 						$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
 						if ($abfrageErgebnis->num_rows == 0) {
-							echo("<div class=\"alert alert-warning\">Kundennummer nicht vorhanden!</div>");
+							echo("<div class='alert alert-warning'>Kundennummer nicht vorhanden!</div>");
 						} else {
 							$kunde = $abfrageErgebnis->fetch_object();
 
 							echo("
-						<table class=\"table\">
+						<table class='table'>
 							<tr>
 								<th>Name</th>
 								<th>Straße</th>
@@ -65,7 +69,7 @@
 							$dbVerbindung->close();
 						}
 					} else {
-						echo "<div class=\"alert alert-danger\" role=\"alert\">";
+						echo "<div class='alert alert-danger' role='alert'>";
 						echo "<h2>Keine Datenbankverbindung</h2>";
 						echo "<p>Fehler: ", mysqli_connect_error(), "</p>";
 						echo "</div>";
