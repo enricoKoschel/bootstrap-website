@@ -116,7 +116,7 @@
 							$dbVerbindung->close();
 						}
 					} else {
-						echo "<div class=\"alert alert-danger\" role=\"alert\">";
+						echo "<div class='alert alert-danger' role='alert'>";
 						echo "<h2>Keine Datenbankverbindung</h2>";
 						echo "<p>Fehler: ", mysqli_connect_error(), "</p>";
 						echo "</div>";
