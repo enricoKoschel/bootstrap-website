@@ -1,20 +1,50 @@
-<center>
+<!DOCTYPE html>
+<html lang="de">
 	<head>
-		<!-- CSS only -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-		<!-- JavaScript Bundle with Popper -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-	</head>
+		<meta charset="UTF-8">
 
-	<form action="nachricht1.php" method="post">
-		<p>
-			<input type="text" name="kundenNummer" placeholder="Kunden Nummer"/>
-			<input type="email" name="email" placeholder="E-Mail"/>
-			</br>
-			</br>
-			<textarea name="nachricht" placeholder="Ihre Nachricht"></textarea>
-		</p>
-		<p><input type="submit" name="" value="Senden"/></p>
-	</form>
-	<a href="index.html"><h1>Startseite</h1></a>
-</center>
+		<!-- CSS only -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+			  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<!-- JavaScript Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+				crossorigin="anonymous"></script>
+
+		<script src="//code.jquery.com/jquery.min.js"></script>
+		<script>
+			$.get("nav.html", function (data) {
+				$("#nav-placeholder").replaceWith(data);
+			});
+		</script>
+
+		<title>Nachricht erstellen</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div id="nav-placeholder"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<form action="nachricht1.php" method="post">
+						<label class="form-label">Kunden Nummer:
+							<input type="text" name="kundenNummer" class="form-control" placeholder="Kunden Nummer"/>
+						</label>
+						<label class="form-label">E-Mail:
+							<input type="email" name="email" class="form-control" placeholder="E-Mail"/>
+						</label>
+						<br>
+						<label class="form-label">Ihre Nachricht:
+							<textarea name="nachricht" class="form-control" placeholder="Ihre Nachricht"></textarea>
+						</label>
+						<br>
+						<button type="submit" class="btn btn-primary">Senden</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
