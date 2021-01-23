@@ -18,7 +18,7 @@
 		});
 	</script>
 
-	<title>Lagerwert</title>
+	<title>Umsätze</title>
 </head>
 <body>
 	<div class="container">
