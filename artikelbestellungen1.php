@@ -1,99 +1,110 @@
 <!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
 
-<center>
-	<head>
-		<meta charset="UTF-8">
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+		  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+			crossorigin="anonymous"></script>
 
-		<!-- CSS only -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-			  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-			  crossorigin="anonymous">
-		<!-- JavaScript Bundle with Popper -->
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-				integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-				crossorigin="anonymous"></script>
-	</head>
-	<body>
-		<?php
-			//Datenbankvariable festlegen
-			$mServer = "localhost";
-			$mBenutzer = "USER409427";
-			$mKennwort = "AlarmStufeRot";
-			$mDatenbank = "db_409427_2";
-			//Datenbankverbindung herstellen
-			$dbVerbindung = new mysqli($mServer, $mBenutzer, $mKennwort, $mDatenbank);
-			// Datenbankverbindung hergestellt ?
-			if (mysqli_connect_errno() == 0) {
-				// Datenübernahme aus der Form
-				$artikelNummer = $_POST['artikelnummer'];
-				// SQL-Anweisung erstellen
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script>
+		$.get("nav.html", function (data) {
+			$("#nav-placeholder").replaceWith(data);
+		});
+	</script>
 
-				$mSQL = "
-					SELECT distinct 
-					kunden.KdNr,
-					kunden.Name,
-					kunden.Strasse,
-					kunden.PLZ,
-					kunden.Ort
+	<title>Artikel Bestellungen</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="nav-placeholder"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<?php
+					$mServer = "localhost";
+					$mBenutzer = "USER409427";
+					$mKennwort = "AlarmStufeRot";
+					$mDatenbank = "db_409427_2";
 
-					FROM auftragspositionen
-					INNER JOIN auftragskoepfe 
-					INNER JOIN kunden
+					$dbVerbindung = new mysqli($mServer, $mBenutzer, $mKennwort, $mDatenbank);
 
-					WHERE auftragspositionen.ArtikelNr = '$artikelNummer'
-					AND auftragskoepfe.AufNr = auftragspositionen.AufNr
-					AND kunden.KdNr = auftragskoepfe.KdNr
-				";
+					if (mysqli_connect_errno() == 0) {
+						$artikelNummer = $_POST['artikelnummer'];
 
-				$abfrageErgebnis = $dbVerbindung->query($mSQL);
+						$mSQL = "
+							SELECT distinct 
+							kunden.KdNr,
+							kunden.Name,
+							kunden.Strasse,
+							kunden.PLZ,
+							kunden.Ort
+		
+							FROM auftragspositionen
+							INNER JOIN auftragskoepfe 
+							INNER JOIN kunden
+		
+							WHERE auftragspositionen.ArtikelNr = '$artikelNummer'
+							AND auftragskoepfe.AufNr = auftragspositionen.AufNr
+							AND kunden.KdNr = auftragskoepfe.KdNr
+						";
 
-				if ($abfrageErgebnis->num_rows == 0) {
-					echo("<h2>Artikelnummer nicht vorhanden oder Artikel wurde nicht bestellt!</h2>");
-				} else {
-					echo("
-						<table border =\"1\">
-							<tr>
-								<th>Kunden Nummer</th>
-								<th>Name</th>
-								<th>Straße</th>
-								<th>PLZ</th>
-								<th>Ort</th>
-							</tr>
-					");
+						$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
-					while ($kunde = $abfrageErgebnis->fetch_object()) {
-						$kundenNummer = $kunde->KdNr;
-						$name = utf8_encode($kunde->Name);
-						$strasse = $kunde->Strasse;
-						$plz = $kunde->PLZ;
-						$ort = $kunde->Ort;
+						if ($abfrageErgebnis->num_rows == 0) {
+							echo("<div class='alert alert-warning'>Artikel Nummer nicht vorhanden oder Artikel wurde nicht bestellt!</div>");
+						} else {
+							echo("
+								<table class='table'>
+									<tr>
+										<th>Kunden Nummer</th>
+										<th>Name</th>
+										<th>Straße</th>
+										<th>PLZ</th>
+										<th>Ort</th>
+									</tr>
+							");
 
-						echo("
-							<tr>
-								<td>" . $kundenNummer . "</td>
-								<td>" . $name . "</td>
-								<td>" . $strasse . "</td>
-								<td>" . $plz . "</td>
-								<td>" . $ort . "</td>
-							</tr>
-						");
+							while ($kunde = $abfrageErgebnis->fetch_object()) {
+								$kundenNummer = $kunde->KdNr;
+								$name = utf8_encode($kunde->Name);
+								$strasse = utf8_encode($kunde->Strasse);
+								$plz = utf8_encode($kunde->PLZ);
+								$ort = utf8_encode($kunde->Ort);
+
+								echo("
+									<tr>
+										<td>" . $kundenNummer . "</td>
+										<td>" . $name . "</td>
+										<td>" . $strasse . "</td>
+										<td>" . $plz . "</td>
+										<td>" . $ort . "</td>
+									</tr>
+								");
+							}
+
+							echo("</table>");
+
+							$abfrageErgebnis->close();
+							$dbVerbindung->close();
+						}
+					} else {
+						echo "<div class='alert alert-danger' role='alert'>";
+						echo "<h2>Keine Datenbankverbindung</h2>";
+						echo "<p>Fehler: ", mysqli_connect_error(), "</p>";
+						echo "</div>";
 					}
-
-					echo("</table>");
-
-					// Ergebnistabellenobjekt und Datenbankverbindung schließen
-					$abfrageErgebnis->close();
-					$dbVerbindung->close();
-				}
-			} else {
-				echo "<div class=\"alert alert-danger\" role=\"alert\">";
-				echo "<h2>Keine Datenbankverbindung</h2>";
-				echo "<p>Fehler: ", mysqli_connect_error(), "</p>";
-				echo "</div>";
-			}
-
-			end:
-		?>
-		<a href="index.html"><h1>Startseite</h1></a>
-	</body>
-</center>
+				?>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
