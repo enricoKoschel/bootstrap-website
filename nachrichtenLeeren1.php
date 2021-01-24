@@ -45,7 +45,7 @@
 
 						$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
-						echo("<div class='alert alert-success'>" . mysqli_affected_rows($dbVerbindung) . " Nachrichten wurden gelöscht!</div>");
+						echo("<div class='alert alert-success'>" . mysqli_affected_rows($dbVerbindung) . " Nachricht(en) wurden gelöscht!</div>");
 					} else {
 						echo "<div class='alert alert-danger' role='alert'>";
 						echo "<h2>Keine Datenbankverbindung</h2>";

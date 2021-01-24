@@ -49,7 +49,7 @@
 
 						$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
-						echo("<div class='alert alert-success'>". mysqli_affected_rows($dbVerbindung) ." erledigte Nachrichten gelöscht!</h2>");
+						echo("<div class='alert alert-success'>". mysqli_affected_rows($dbVerbindung) ." erledigte Nachricht(en) gelöscht!</h2>");
 					}
 					else
 					{
