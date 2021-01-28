@@ -1,3 +1,17 @@
+<?php
+	session_start();
+
+	if (isset($_POST['self-post'])) {
+		$_SESSION['name'] = utf8_decode($_POST['name']);
+		$_SESSION['strasse'] = utf8_decode($_POST['strasse']);
+		$_SESSION['plz'] = $_POST['plz'];
+		$_SESSION['ort'] = utf8_decode($_POST['ort']);
+
+		header("Location: kdaend2.php");
+		die();
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -13,9 +27,9 @@
 
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script>
-        $.get("nav.html", function (data) {
-            $("#nav-placeholder").replaceWith(data);
-        });
+		$.get("nav.html", function (data) {
+			$("#nav-placeholder").replaceWith(data);
+		});
 	</script>
 
 	<title>Kunden Bestellungen</title>
@@ -57,16 +71,29 @@
 							echo("<div class='alert alert-warning'>Kundennummer nicht vorhanden!</div>");
 							return;
 						} else {
+							$_SESSION['kundennummer'] = $kundennummer;
+
+							$kunde = $abfrageErgebnis->fetch_object();
+
 							echo("
-								<form action='kdaend2.php' method='post'>
-									<label class='form-label'>Kunden Nummer:
-										<input type='text' name='kundennummer' class='form-control' placeholder='Kunden Nummer'/>
+								<form action='' method='post'>
+									<label class='form-label'>Name:
+										<input type='text' name='name' class='form-control' placeholder='Name' value='" . utf8_encode($kunde->Name) . "'/>
 									</label>
-									<label class='form-label'>Passwort:
-										<input type='password' name='passwort' class='form-control' placeholder='Passwort'/>
+									<label class='form-label'>Straße:
+										<input type='text' name='strasse' class='form-control' placeholder='Straße' value='" . utf8_encode($kunde->Strasse) . "'/>
 									</label>
+									<label class='form-label'>PLZ:
+										<input type='text' name='plz' class='form-control' placeholder='PLZ' maxlength='5' value='$kunde->PLZ'/>
+									</label>
+									<label class='form-label'>Ort:
+										<input type='text' name='ort' class='form-control' placeholder='Ort' value='" . utf8_encode($kunde->Ort) . "'/>
+									</label>
+
+									<input type='hidden' name='self-post' value='exists'/>
+
 									<br>
-									<button type='submit' class='btn btn-primary'>Suchen</button>
+									<button type='submit' class='btn btn-primary'>Senden</button>
 								</form>
 							");
 
