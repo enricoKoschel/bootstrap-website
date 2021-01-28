@@ -21,12 +21,9 @@
 	<title>Lagerwert</title>
 </head>
 <body>
+	<div id="nav-placeholder"></div>
+
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="nav-placeholder"></div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<?php
@@ -72,9 +69,9 @@
 
 								echo("
 									<tr>
-										<td>". $artikelNummer ."</td>
-										<td>". $bezeichnung ."</td>
-										<td>". number_format($lagerwert, 2, ",", ".") ."</td>
+										<td>" . $artikelNummer . "</td>
+										<td>" . $bezeichnung . "</td>
+										<td>" . number_format($lagerwert, 2, ",", ".") . "</td>
 									</tr>
 								");
 

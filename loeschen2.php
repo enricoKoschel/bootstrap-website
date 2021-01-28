@@ -21,24 +21,20 @@
 	<title>Alle Nachrichten löschen</title>
 </head>
 <body>
+	<div id="nav-placeholder"></div>
+
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="nav-placeholder"></div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<?php
-					$mServer="localhost";
+					$mServer = "localhost";
 					$mBenutzer = "USER409427";
 					$mKennwort = "AlarmStufeRot";
 					$mDatenbank = "db_409427_2";
 
 					$dbVerbindung = new mysqli($mServer, $mBenutzer, $mKennwort, $mDatenbank);
 
-					if(mysqli_connect_errno() == 0)
-					{
+					if (mysqli_connect_errno() == 0) {
 						$kundenNummer = $_POST['kundenNummer'];
 
 						$mSQL = "
@@ -49,10 +45,8 @@
 
 						$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
-						echo("<div class='alert alert-success'>". mysqli_affected_rows($dbVerbindung) ." erledigte Nachricht(en) gelöscht!</h2>");
-					}
-					else
-					{
+						echo("<div class='alert alert-success'>" . mysqli_affected_rows($dbVerbindung) . " erledigte Nachricht(en) gelöscht!</h2>");
+					} else {
 						echo "<div class='alert alert-danger' role='alert'>";
 						echo "<h2>Keine Datenbankverbindung</h2>";
 						echo "<p>Fehler: ", mysqli_connect_error(), "</p>";

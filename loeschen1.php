@@ -21,24 +21,20 @@
 	<title>Erledigte Nachrichten löschen</title>
 </head>
 <body>
+	<div id="nav-placeholder"></div>
+
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="nav-placeholder"></div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<?php
-					$mServer="localhost";
+					$mServer = "localhost";
 					$mBenutzer = "USER409427";
 					$mKennwort = "AlarmStufeRot";
 					$mDatenbank = "db_409427_2";
 
 					$dbVerbindung = new mysqli($mServer, $mBenutzer, $mKennwort, $mDatenbank);
 
-					if(mysqli_connect_errno() == 0)
-					{
+					if (mysqli_connect_errno() == 0) {
 						$kundenNummer = $_POST['kundenNummer'];
 
 						$mSQL = "
@@ -48,10 +44,9 @@
 
 						$abfrageErgebnis = $dbVerbindung->query($mSQL);
 
-						if($abfrageErgebnis->num_rows == 0){
+						if ($abfrageErgebnis->num_rows == 0) {
 							echo("<div class='alert alert-info'>Keine Nachrichten für diesen Kunden vorhanden!</div>");
-						}
-						else{
+						} else {
 							echo("
 								<table class='table'>
 									<tr>
@@ -63,8 +58,7 @@
 									</tr>
 							");
 
-							while ($nachricht = $abfrageErgebnis->fetch_object())
-							{
+							while ($nachricht = $abfrageErgebnis->fetch_object()) {
 								$nachrichtNr = $nachricht->NachrichtNr;
 								$kundenNummer = $nachricht->KdNr;
 								$email = utf8_encode($nachricht->EMail);
@@ -74,11 +68,11 @@
 
 								echo("
 									<tr>
-										<td>". $nachrichtNr ."</td>
-										<td>". $kundenNummer ."</td>
-										<td>". $email ."</td>
-										<td>". $nachrichtenText ."</td>
-										<td>". $erledigt ."</td>
+										<td>" . $nachrichtNr . "</td>
+										<td>" . $kundenNummer . "</td>
+										<td>" . $email . "</td>
+										<td>" . $nachrichtenText . "</td>
+										<td>" . $erledigt . "</td>
 									</tr>
 								");
 							}
@@ -93,9 +87,7 @@
 								</form>"
 							);
 						}
-					}
-					else
-					{
+					} else {
 						echo "<div class='alert alert-danger' role='alert'>";
 						echo "<h2>Keine Datenbankverbindung</h2>";
 						echo "<p>Fehler: ", mysqli_connect_error(), "</p>";

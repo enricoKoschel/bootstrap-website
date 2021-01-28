@@ -22,12 +22,9 @@
 	<title>Warengruppen</title>
 </head>
 <body>
+	<div id="nav-placeholder"></div>
+
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div id="nav-placeholder"></div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<?php
@@ -59,7 +56,7 @@
 
 							while ($aktuellerArtikel = $abfrageErgebnis->fetch_object()) {
 								echo "<tr><td>$aktuellerArtikel->ArtikelNr</td>";
-								echo "<td>". utf8_encode($aktuellerArtikel->Bezeichnung) ."</td>";
+								echo "<td>" . utf8_encode($aktuellerArtikel->Bezeichnung) . "</td>";
 								echo "<td>";
 								echo number_format($aktuellerArtikel->VkPreis, 2, ",", ".");
 								echo "</td><td>";
