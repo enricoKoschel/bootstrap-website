@@ -1,2 +1,2 @@
 # Datenbanken-Bar
-PHP Schoolproject.
+PHP School project using Bootstrap.
