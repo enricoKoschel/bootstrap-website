@@ -40,10 +40,10 @@
 
 					if (mysqli_connect_errno() == 0) {
 						$kundennummer = $_SESSION['kundennummer'];
-						$name = $_POST['name'];
-						$strasse = $_POST['strasse'];
+						$name = utf8_decode($_POST['name']);
+						$strasse = utf8_decode($_POST['strasse']);
 						$plz = $_POST['plz'];
-						$ort = $_POST['ort'];
+						$ort = utf8_decode($_POST['ort']);
 
 						$mSQL = "
 							UPDATE kunden

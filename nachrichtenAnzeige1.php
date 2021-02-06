@@ -47,7 +47,7 @@
 								<tr>
 									<th>NachrichtNr</th>
 									<th>KdNr</th>
-									<th>EMail</th>
+									<th>E-Mail</th>
 									<th>Nachricht</th>
 									<th>Erledigt</th>
 								</tr>
@@ -78,7 +78,8 @@
 							<form action='erledigen1.php' method='post'>
 								<h3>Nachricht erledigen</h3>
 								<label class='form-label'>Nachrichten Nummer:
-									<input type='text' name='nachrichtenNummer' class='form-control' placeholder='Nachrichten Nummer'/>
+									<input type='text' name='nachrichtenNummer' maxlength='10' class='form-control'
+									placeholder='Nachrichten Nummer'/>
 								</label>
 								<br>
 								<button type='submit' class='btn btn-primary'>Senden</button>

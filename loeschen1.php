@@ -82,7 +82,7 @@
 							echo("
 								<form action='loeschen2.php' method='post'>
 									<h3>Erledigte Nachrichten von Kunde $kundenNummer löschen:</h3>
-									<input type='hidden' name='kundenNummer' value='$kundenNummer'/>
+									<input type='hidden' name='kundenNummer' maxlength='5' value='$kundenNummer'/>
 									<button type='submit' class='btn btn-primary'>Senden</button>
 								</form>"
 							);

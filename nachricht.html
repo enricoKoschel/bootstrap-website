@@ -28,14 +28,16 @@
 			<div class="col-md-12 text-center">
 				<form action="nachricht1.php" method="post">
 					<label class="form-label">Kunden Nummer:
-						<input type="text" name="kundenNummer" class="form-control" placeholder="Kunden Nummer"/>
+						<input type="text" name="kundenNummer" maxlength="5" class="form-control"
+							   placeholder="Kunden Nummer"/>
 					</label>
 					<label class="form-label">E-Mail:
-						<input type="email" name="email" class="form-control" placeholder="E-Mail"/>
+						<input type="email" name="email" maxlength="50" class="form-control" placeholder="E-Mail"/>
 					</label>
 					<br>
 					<label class="form-label">Ihre Nachricht:
-						<textarea name="nachricht" class="form-control" placeholder="Ihre Nachricht"></textarea>
+						<textarea name="nachricht" maxlength="200" class="form-control"
+								  placeholder="Ihre Nachricht"></textarea>
 					</label>
 					<br>
 					<button type="submit" class="btn btn-primary">Senden</button>

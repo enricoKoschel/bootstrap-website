@@ -18,9 +18,9 @@
 
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script>
-        $.get("nav.html", function (data) {
-            $("#nav-placeholder").replaceWith(data);
-        });
+		$.get("nav.html", function (data) {
+			$("#nav-placeholder").replaceWith(data);
+		});
 	</script>
 
 	<title>Allgemeinwissenstest Auswertung</title>
@@ -32,35 +32,35 @@
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<?php
-					if(!$_SESSION['question1']){
+					if (!$_SESSION['question1']) {
 						$question1 = "Nicht";
-					}else if($_SESSION['question1'] == "option4"){
+					} else if ($_SESSION['question1'] == "option4") {
 						$question1 = "Korrekt";
-					}else{
+					} else {
 						$question1 = "Falsch";
 					}
 
-					if(!$_SESSION['question2']){
+					if (!$_SESSION['question2']) {
 						$question2 = "Nicht";
-					}else if($_SESSION['question2'] == "option2"){
+					} else if ($_SESSION['question2'] == "option2") {
 						$question2 = "Korrekt";
-					}else{
+					} else {
 						$question2 = "Falsch";
 					}
 
-					if(!$_SESSION['question3']){
+					if (!$_SESSION['question3']) {
 						$question3 = "Nicht";
-					}else if($_SESSION['question3'] == "option1"){
+					} else if ($_SESSION['question3'] == "option1") {
 						$question3 = "Korrekt";
-					}else{
+					} else {
 						$question3 = "Falsch";
 					}
 
-					if(!$_SESSION['question4']){
+					if (!$_SESSION['question4']) {
 						$question4 = "Nicht";
-					}else if($_SESSION['question4'] == "option3"){
+					} else if ($_SESSION['question4'] == "option3") {
 						$question4 = "Korrekt";
-					}else{
+					} else {
 						$question4 = "Falsch";
 					}
 

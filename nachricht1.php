@@ -36,8 +36,8 @@
 
 					if (mysqli_connect_errno() == 0) {
 						$kundenNummer = $_POST['kundenNummer'];
-						$email = $_POST['email'];
-						$nachricht = $_POST['nachricht'];
+						$email = utf8_decode($_POST['email']);
+						$nachricht = utf8_decode($_POST['nachricht']);
 
 						if (!$kundenNummer) {
 							echo("<div class='alert alert-warning'>Keine Kundennummer eingegeben!</div>");
