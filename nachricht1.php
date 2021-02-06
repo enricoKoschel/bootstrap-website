@@ -70,7 +70,7 @@
 
 						$error = $dbVerbindung->error;
 
-						if (strpos($error, "foreign key constraint fails") != false || strpos($error, "too long for column") != false) {
+						if (strpos($error, "foreign key constraint fails")) {
 							echo("<div class='alert alert-warning'>Diese Kundennummer existiert nicht!</div>");
 							return;
 						} else if ($error) {
